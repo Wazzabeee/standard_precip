@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from lmoments import distr
 
 
 def plot_index(df: pd.DataFrame, date_col: str, precip_col: str, save_file: str=None,
@@ -69,7 +70,7 @@ def best_fit_distribution(data: np.array, dist_list: list, fit_type: str='lmom',
     sse: dict (key - distribution, value - sum of square error)
         The sum of the squares error between fitted distribution and pdf.
     '''
-    y, x = np.histogram(data, bins=bins, normed=True)
+    y, x = np.histogram(data, bins=bins, density=True)
     x = (x + np.roll(x, -1))[:-1] / 2.0
 
     sse = {}
